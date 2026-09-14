@@ -1,0 +1,39 @@
+import random
+
+def guess_number():
+    # 随机生成 1–100 的整数
+    secret = random.randint(1, 100)
+    attempts = 0
+
+    print("🎮 欢迎来到猜数字游戏！")
+    print("我已经想好了一个 1 到 100 之间的整数。")
+
+    while True:
+        user_input = input("请输入你的猜测: ").strip()
+
+        # 输入验证：必须是正整数
+        if not user_input.isdigit():
+            print("⚠️ 输入无效，请输入一个正整数。")
+            continue
+
+        guess = int(user_input)
+
+        # 范围验证
+        if guess < 1 or guess > 100:
+            print("⚠️ 数字必须在 1 到 100 之间，请重新输入。")
+            continue
+
+        attempts += 1
+
+        # 比较并给出提示
+        if guess > secret:
+            print("📉 太大了，再小一点。")
+        elif guess < secret:
+            print("📈 太小了，再大一点。")
+        else:
+            print(f"🎉 恭喜！你猜对了，答案就是 {secret}。")
+            print(f"你一共猜了 {attempts} 次。")
+            break
+
+if __name__ == "__main__":
+    guess_number()
