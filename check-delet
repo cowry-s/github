@@ -1,0 +1,23 @@
+import re
+
+def clean_text(text, use_regex=True):
+    if use_regex:
+        # 保留字母和数字，忽略标点和空格；\w 包含下划线，所以用 [^a-zA-Z0-9] 不适用中文
+        # 更通用：保留字母数字字符
+        cleaned = re.sub(r'[^\w]', '', text).lower()
+    else:
+        cleaned = ''.join(ch.lower() for ch in text if ch.isalnum())
+    return cleaned
+
+def is_palindrome(text):
+    cleaned = clean_text(text)
+    return cleaned == cleaned[::-1], cleaned
+
+def main():
+    text = input("请输入一句话: ")
+    result, cleaned = is_palindrome(text)
+    print(f"清理后: {cleaned}")
+    if result:
+        print("✅ 是回文")
+    else:
+        print("❌ 不是回文")
